@@ -5,7 +5,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" >
-                    <h4 class="modal-title">Ask Questions2</h4>
+                    <h4 class="modal-title">Ask Questions</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="mb-3">
