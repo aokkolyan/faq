@@ -189,7 +189,7 @@
             @endif
 
             {{-- Import users form --}}
-            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data" >
+            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data" style="display: none">
                 @csrf
                 <input type="file" name="file" class="form-control" >
                 @if ($errors->has('file'))
