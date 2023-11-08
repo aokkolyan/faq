@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\User;
-use App\Models\vote;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -27,6 +27,6 @@ function getAuthUserId() {
  * @return number of vote count
  */
 function getCountVote($question_id, $answer_id) {
-    $count = vote::where('question_id', $question_id)->where('answer_id', $answer_id)->count();
+    $count = Vote::where('question_id', $question_id)->where('answer_id', $answer_id)->count();
     return $count;
 }
