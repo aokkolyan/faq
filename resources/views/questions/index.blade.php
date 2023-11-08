@@ -169,12 +169,6 @@
     </style>
     <div class="row">
         <div class="col-md-1 p-3  text-black">
-            <dl>
-                
-                <dt>Home</dt><br>
-                <dt>Public</dt>
-            </dl>
-
         </div>
         <div class="col-md-8 p-3  text-black">
             @if (Route::has('login'))
