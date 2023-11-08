@@ -189,7 +189,7 @@
             @endif
 
             {{-- Import users form --}}
-            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data"  style="display: none">
+            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <input type="file" name="file" class="form-control" >
                 @if ($errors->has('file'))
@@ -261,7 +261,7 @@
                  autocomplete="off"   aria-label="Search">
                 <button type="submit" class="btn btn-outline-success">Search</button>
             </form><br>
-            <a class="product inherits-color block flex-1" id="product">
+            <a class="product inherits-color block flex-1" id="product" style="display: none">
                 <div class="panel relative transition-colors duration-300 dark  text-white bg-panel-800 hover:bg-panel-700 rounded-xl mx-auto px-px py-px text-center"
                     style="height: 210px; background: linear-gradient(148deg, rgb(33, 200, 246) -11%, rgba(33, 200, 246, 0) 42%); max-width: 450px;">
                     <div class="flex h-full flex-col justify-between gap-y-4 rounded-2xl px-5 py-4 items-center"
@@ -289,20 +289,6 @@
                     </div>
                 </div>
             </a>
-            <div class="qa-activity-count">
-                <p class="qa-activity-count-item">
-                <span class="qa-activity-count-data">16.2k</span> questions
-                </p>
-                <p class="qa-activity-count-item">
-                <span class="qa-activity-count-data">16.1k</span> answers
-                </p>
-                <p class="qa-activity-count-item">
-                <span class="qa-activity-count-data">33.9k</span> comments
-                </p>
-                <p class="qa-activity-count-item">
-                <span class="qa-activity-count-data">767k</span> users
-                </p>
-                </div>
         </div>
 
 

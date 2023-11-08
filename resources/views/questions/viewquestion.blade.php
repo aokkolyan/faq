@@ -249,6 +249,8 @@
                         @endif
                     </div>
                 @endforeach
+                @if (Route::has('login'))
+                @auth
                 <form action="{{ route('question.answer', $questions->id) }}" method="POST" enctype="multipart/form-data"
                     multiple>
                     @csrf
@@ -268,21 +270,35 @@
                             </ul>
                         </div>
                     @endif
-                    {{-- <div class="mb-3">
-                            <label class="form-label" for="inputImage">Image:</label>
-                            <input type="file" name="image" class="form-control" multiple >
-                          
-                        </div>
-                        <div class="mb-3">
-                            <label class="video" for="video">Upload Video:</label>
-                            <input type="file" name="video" id="video" class="form-control">
-                        </div> --}}
-                    {{-- <textarea class="form-control" name="title_answer" id="editor" placeholder="Answer..............">
-                              
-                        </textarea> --}}
 
                     <button type="submit" class="btn mt-3 btn-primary">Post Your Answer</button>
                 </form>
+                @else
+                   
+                @endauth
+            @endif
+                {{-- <form action="{{ route('question.answer', $questions->id) }}" method="POST" enctype="multipart/form-data"
+                    multiple>
+                    @csrf
+                    <div class="form-group">
+
+                        <label for="">Your Answer</label>
+                        <div class="form-group">
+                            <textarea id="summernote" name="title_answer" placeholder="Answer.........."></textarea>
+                        </div>
+                    </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <button type="submit" class="btn mt-3 btn-primary">Post Your Answer</button>
+                </form> --}}
 
 
             </div>
