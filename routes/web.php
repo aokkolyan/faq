@@ -7,6 +7,7 @@ use App\Http\Controllers\AnswerController;
 use Symfony\Component\Console\Input\Input;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
 
 /*
@@ -52,7 +53,7 @@ Route::get('/question/search',[QuestionController::class,'search']);
  //Route::post('/down-vote',[VoteController::class,'down-vote'])->name('vote');
 
  //Import User
- //Route::post('users-import', 'import')->name('users.import');
+ Route::post('users-import', [UserController::class,'import'])->name('users.import');
 
 //Post test//
 Route::get('/posts',[PostController::class,'index']);

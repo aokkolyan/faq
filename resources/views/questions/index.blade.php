@@ -189,12 +189,20 @@
             @endif
 
             {{-- Import users form --}}
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data"  style="display: none">
                 @csrf
-                <input type="file" name="file" class="form-control">
+                <input type="file" name="file" class="form-control" >
+                @if ($errors->has('file'))
+                    <span class="text-danger">{{ $errors->first('file') }}</span>
+                @endif
                 <br>
                 <button class="btn btn-success">Import User Data</button>
             </form>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+                </div>
+            @endif
             <p><strong>{{ $questions->count() }}</strong> questions
             <h5 class="qa-main-heading">All Questions</h5>
             </p>
