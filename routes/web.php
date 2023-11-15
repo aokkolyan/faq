@@ -39,8 +39,14 @@ Route::get('/question',[QuestionController::class,'index'])->name('question');
 Route::post('/question/store',[QuestionController::class,'store'])->name('addquestion');
 //Route::get('/question',[QuestionController::class,'show']);
 Route::get('/question/viewquestion/{id}/',[QuestionController::class,'viewquestion'])->name('viewquestion');
-//Route::get('/question/viewanswer/{id}',[QuestionController::class,'viewanswer']);
+// Route::get('/question/viewanswer/{id}',[QuestionController::class,'viewanswer']);
 Route::post('/question/viewquestion/{id}/',[QuestionController::class,'answerstore'])->name('question.answer');
+Route::get('/question/edit/{id}',[QuestionController::class,'question_edit'])->name('question.edit');
+Route::put('/question/update/{id}',[QuestionController::class,'question_update'])->name('question.update');
+Route::delete('/question/delete/{id}', [QuestionController::class, 'delete'])->name('question.delete');
+Route::get('/question/editanswer/{id}',[QuestionController::class,'edit_answer'])->name('answer.edit');
+Route::put('/question/updateanswer/{id}',[QuestionController::class,'update_answer'])->name('answer.update');
+Route::delete('/question/deleteanswer/{id}',[QuestionController::class,'delete_answer'])->name('answer.delete');
 Route::post('/upload',[QuestionController::class,'upload'])->name('ckeditor.upload');
 Route::get('/question/search',[QuestionController::class,'search']);
 

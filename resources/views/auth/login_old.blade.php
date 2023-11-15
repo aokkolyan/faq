@@ -1,6 +1,6 @@
 <link rel="shortcut icon" type="image/png" href="{{ asset('/images/favicon.png')}}"/>
 <title>FAQ_Login</title>
-<x-guest-layout >
+<x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

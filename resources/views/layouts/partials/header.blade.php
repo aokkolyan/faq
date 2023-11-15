@@ -1,5 +1,5 @@
 
-    <div class="col-md-6 p-3  text-black">
+    {{-- <div class="col-md-6 p-3  text-black">
         @if (Route::has('login'))
           @auth
           <a class="float-end btn btn-primary" href="{{ route('question') }} "  data-bs-toggle="modal"
@@ -18,5 +18,5 @@
                 <p style="font-size: 13px;font-family:sans-serif">{{$item->description}}</p>
              <hr style="2px solid balck; border-radius: 5px; ">
             @endforeach     
-    </div>
+    </div> --}}
  

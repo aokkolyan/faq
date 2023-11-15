@@ -1,9 +1,9 @@
    <!-- The Modal -->
 <form action="{{ route('addquestion') }}" method="POST">
     @csrf
-    <div class="modal" id="myModal">
+    <div class="modal" id="myModal" style="margin-top: 90px;">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content p-2">
                 <div class="modal-header" >
                     <h4 class="modal-title">Ask Questions</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label p-2">Description</label>
-                    <textarea class="form-control" rows="3"  name="description" autocomplete="off"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Description.............."  name="description" autocomplete="off"></textarea>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">

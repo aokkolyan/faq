@@ -33,24 +33,20 @@ class QuestionController extends Controller
 
   public function viewquestion(Request $request, $id)
   {
-    $questions = DB::table('questions')->where('id', $id)->get();
+    // $questions = DB::table('questions')->where('id', $id)->paginate(10);
+    $question = Question::with(['question'])->where('id', $id)->first();
+
+    // return response()->json($question);
 
     // $answers = DB::table('answers')
     //   ->where('question_id', $id)
     //   ->get();
-
+  
     $answers = Answer::with('user')
       ->where('question_id', $id)
       ->get();
-    
-    $questions = Question::find($id);
-    return view('questions.viewquestion', compact('questions', 'answers'));
+    return view('questions.detail', compact('question', 'answers'));
   }
-
-  //  public function viewanswer($id){
-  //   $answers = Answer::find($id);
-  //   return view('answers.viewanswer',compact('answers'));
-  //  }
   public function answerstore(Request $request, $id)
   {
     $request->validate([
@@ -83,15 +79,64 @@ class QuestionController extends Controller
   }
   public function search(Request $request)
   {
-      // Get the search value from the request
-    $search = $request->input('search');
-
-    // Search in the title and body columns from the posts table
+   
+    $search = $request->input('search');  
     $questions = Question::query()
         ->where('question_title', 'LIKE', "%{$search}%")
         ->orWhere('description', 'LIKE', "%{$search}%")
         ->paginate(10);
         // dd($questions);
          return view('questions.index', compact('questions'));
+    }
+
+    public function question_edit($id)
+    {
+      $questions = Question::find($id);
+      // $questions = Question::paginate(10);
+      return view('questions.edit',compact('questions'));
+    }
+
+    public function question_update(Request $request , $id)
+    {
+     
+      $request->validate([
+        'question_title'=> 'required'
+      ]);
+      $questions = Question::find($id);
+      $questions->question_title = $request->input('question_title');
+      $questions->description    = $request->input('description');
+      $questions->update();
+      // $questions->update($request->all());
+      return redirect('/')->with('success','Update success');
+      //  return redirect()->route('viewquestion', ['id'=>$id]);
+                        // ->with('success','Product updated successfully');
+    }
+
+    public function delete($id)
+    {
+      Question::find($id)->delete();
+      return back();
+    }
+
+    public function edit_answer($id)
+    {
+      $answer = Answer::find($id);
+      return view ('answers.edit',compact('answer'));
+    }
+    public function update_answer(Request $request ,$id)
+    {
+      $request->validate([
+        'title_answer' => 'required'
+      ]);
+      $answer = Answer::find($id);
+      $answer->title_answer = $request->input('title_answer');
+      $answer->update();
+      return redirect('/')->with('success','Update success');
+    }
+    
+    public function delete_answer($id)
+    {
+      Answer::find($id)->delete();
+      return back();
     }
 }

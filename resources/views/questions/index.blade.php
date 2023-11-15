@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
     <style>
         html {
             font-size: 16px;
@@ -102,20 +101,20 @@
             font-size: 24px;
             line-height: 40px;
             display: block;
-           
+
         }
 
         .qa-netvote-count-pad,
         .qa-a-count-pad {
             font-size: 12px;
         }
-      
+
         .qa-a-count {
             background-color: #3498db;
             color: #fff;
             text-align: center;
         }
-        
+
         .qa-a-count-zero {
             background-color: #e74c3c;
         }
@@ -147,6 +146,7 @@
             width: 20px;
             position: relative;
         }
+
         .qa-vote-up-button,
         .qa-vote-down-button,
         .qa-voted-down-button,
@@ -173,19 +173,19 @@
         <div class="col-md-8 p-3  text-black">
             @if (Route::has('login'))
                 @auth
-                    <a class="float-end btn btn-primary" href="{{ route('question') }} " data-bs-toggle="modal"
+                    <a class="float-end btn btn-primary m-2" href="{{ route('question') }} " data-bs-toggle="modal"
                         data-bs-target="#myModal" aria-disabled="true">Ask question</a>
                 @else
                     <div class="alert alert-danger">
-                        <p>Please login first to ask question!!</p>
+                        <p>Please login to ask question!!</p>
                     </div>
                 @endauth
             @endif
 
             {{-- Import users form --}}
-            <form action="{{route('users.import')}}" method="POST" enctype="multipart/form-data" >
+            <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="file" name="file" class="form-control" >
+                <input type="file" name="file" class="form-control col-md-5">
                 @if ($errors->has('file'))
                     <span class="text-danger">{{ $errors->first('file') }}</span>
                 @endif
@@ -193,55 +193,65 @@
                 <button class="btn btn-success">Import User Data</button>
             </form>
             @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
                 </div>
             @endif
-            <p><strong>{{ $questions->count() }}</strong> questions
+            {{-- <p><strong>{{ $questions->count() }}</strong> questions --}}
             <h5 class="qa-main-heading">All Questions</h5>
             </p>
-
-
+            
             @foreach ($questions as $item)
-                {{-- @dd($item) --}}
-
-                <div class="question-list">
-                    <div class="qa-q-item-stats" style="display:none">
-                        <div class="qa-voting qa-voting-net" id="voting_111145">
-                            <div class="qa-vote-buttons qa-vote-buttons-net" id="qa-btn">
-                                <input title="Click to vote up" name="vote_up" type="submit" id="up_voes" value="+" 
-                                    class="qa-vote-first-button qa-vote-up-button">
-                                <input title="Click to vote down" name="vote_down" id="down_votes" type="submit" value="–"
-                                    class="qa-vote-second-button qa-vote-down-button">
-                            </div>
-                            <div class="qa-vote-count qa-vote-count-net">
-                                <span class="qa-netvote-count">
-                                    <span class="qa-netvote-count-data" >0</span><span class="qa-netvote-count-pad">
-                                        votes</span>
-                                </span>
-                            </div>
-                            <div class="qa-vote-clear">
-                            </div>
+            <div class="question-list">
+                <div class="qa-q-item-stats" style="display:none">
+                    <div class="qa-voting qa-voting-net" id="voting_111145">
+                        <div class="qa-vote-buttons qa-vote-buttons-net" id="qa-btn">
+                            <input title="Click to vote up" name="vote_up" type="submit" id="up_voes" value="+"
+                                class="qa-vote-first-button qa-vote-up-button">
+                            <input title="Click to vote down" name="vote_down" id="down_votes" type="submit"
+                                value="–" class="qa-vote-second-button qa-vote-down-button">
+                        </div>
+                        <div class="qa-vote-count qa-vote-count-net">
+                            <span class="qa-netvote-count">
+                                <span class="qa-netvote-count-data">0</span><span class="qa-netvote-count-pad">
+                                    votes</span>
+                            </span>
+                        </div>
+                        <div class="qa-vote-clear">
                         </div>
                     </div>
-                    <ol class="q" style="padding:10px;">
-                        
-                        <li>
-                            
-                            <h5 class="s-post-summary--content-title" style=" font-weight: bold;">
-                                <a href="/question/viewquestion/{{ $item->id }}" class="s-link"
-                                    target="blink">-{{ $item->question_title }}</a>
-
-                            </h5>
-                        </li>
-                        <p style="font-size: 13px;font-family:sans-serif">{{ $item->description }}</p>
-                        <p style="float:right;font-size:12px;cursor: pointer;">Q2A by <span
-                                style="color:rgba(10,114,170,255);font-weight:bold">{{ $item->question->name }}</span></p>
-                        {{-- <hr style="2px solid balck; border-radius: 5px; "> --}}
-                    </ol>
-
                 </div>
+                <ol class="q" style="padding:10px;">
+                  
+                    <li>
+                        <h5 class="s-post-summary--content-title" style=" font-weight: bold;">
+                            <a href="/question/viewquestion/{{$item->id}}" class="s-link"
+                                target="blink">{{ $item->question_title }}</a>
+                        </h5>
+                    </li>
+                    <p style="font-size: 13px;font-family:sans-serif">{{ $item->description }}</p>
+                    <p style="float:right;font-size:12px;cursor: pointer;">Q2A by <span style="color:rgba(10,114,170,255);font-weight:bold">{{ $item->question->name }}</span></p>
+                </ol>
+                @if(Route::has('login'))
+                @auth
+                    <form action="{{route('question.update',$item->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('question.edit', $item->id) }}">
+                            <i class="fa-solid fa-pen-to-square pointer" title="edit" style="cursor: pointer;"></i></a>
+                            {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
+                    </form>
+                    <form action="{{route('question.delete',$item->id)}}" method="POST">
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <a  type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a> 
+                    </form>
+                @endauth
+                @endif
+               
+            </div>
             @endforeach
+            
             {{-- {!! $questions->appends(Request::all())->links() !!} --}}
             {{-- {{ $questions->withQueryString()->links() }} --}}
             <div class="d-flex">
@@ -251,9 +261,9 @@
         <div class="col-md-3 p-3  text-black" id="productlist">
             <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search" >
                 @csrf
-                <input class="form-control me-2" name="search" type="text" placeholder="Search" value="{{request()->get('search')}}"
-                 autocomplete="off"   aria-label="Search">
-                <button type="submit" class="btn btn-outline-success">Search</button>
+                <input class="form-control me-2" name="search" type="text" placeholder="Search"
+                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" style="display: none">
+                <button type="submit" class="btn btn-outline-success" style="display: none">Search</button>
             </form><br>
             <a class="product inherits-color block flex-1" id="product" style="display: none">
                 <div class="panel relative transition-colors duration-300 dark  text-white bg-panel-800 hover:bg-panel-700 rounded-xl mx-auto px-px py-px text-center"
@@ -284,16 +294,37 @@
                 </div>
             </a>
         </div>
-
-
     </div>
+   
 @endsection
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
-      $(document).ready(function (){
-        $("#up_voes").click(function (e){
-           alert (" Hello World");
+     $('.show_confirm').click(function(event) {
+
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+
+        event.preventDefault();
+
+        swal({
+
+            title: `Are you sure you want to delete this record?`,
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+
+        if (willDelete) {
+            form.submit();
+        }
         });
-      });
+     });
+        $(document).ready(function() {
+            $("#up_voes").click(function(e) {
+                alert(" Hello World");
+            });
+        });
     </script>
 @endsection
