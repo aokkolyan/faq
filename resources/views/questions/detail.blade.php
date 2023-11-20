@@ -252,12 +252,13 @@
                 </div>
             <h2 id="a_list_title"><span itemprop="answerCount">{{ $answers->count()}}</span> Answer</h2>
             @foreach ($answers as $answer)
-                <div class="list-group">
+                <div class="list-group" >
                     <div class="qa-q-item-stats">
+                       
                     </div>
                     
                     <li class="list-group-item list-group-item-action m-2" aria-current="true" id="answers-list"
-                        style="height: auto">
+                        style="height: auto;margin-left:10px">
                         @if (Route::has('login'))
                             @auth
                             @if(Auth::user()->id == $answer->user_id)

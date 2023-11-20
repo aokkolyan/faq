@@ -5,8 +5,8 @@ padding: 5px; border: 2px solid #4CAF50;">
             style="max-height:29px; with:auto;vertical-align: bottom;
             max-width: 100%;
             height: auto !important"></a> --}}
-            
-        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px;"></a>
+         <a href="{{ route('question') }}" style="text-decoration: none;font-size: 28px;font-family: monospace; text-shadow:  0 0 3px #FF0000;">FAQ</a>   
+        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px; display:none"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -47,11 +47,11 @@ padding: 5px; border: 2px solid #4CAF50;">
                         </ul>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500  btn btn-info">Log in</a>
+                    <a href="{{ route('login') }}" class="text-sm text-white-700 dark:text-gray-500 " style="list-style-type: none">Log in</a>
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-white-700 dark:text-gray-500 btn btn-primary" >Register</a>
+                            class="ml-4 text-sm text-white-700 white:text-white-500 ">Register</a>
                     @endif
                 @endauth
             </div>
