@@ -1,11 +1,12 @@
-<nav class="navbar" style="position: relative;z-index: 99999;background: #00A351;color: white;border-bottom: 1px solid #eee;">
+<nav class="navbar" style="position: relative;z-index: 99999;background: #00A351;color: white;border-bottom: 1px solid #eee;  position: -webkit-sticky;position: sticky;top: 0;
+padding: 5px; border: 2px solid #4CAF50;">
     <div class="container-fluid">
         {{-- <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/question2answer-qa-logo-white-454x40.png')}}" alt="image"
             style="max-height:29px; with:auto;vertical-align: bottom;
             max-width: 100%;
             height: auto !important"></a> --}}
             
-        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px;background-color: aquamarine;"></a>
+        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px;"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -16,12 +17,12 @@
                 </li>
             </ul>
         </div>
-        <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search">
+        {{-- <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search">
             @csrf
             <input class="form-control me-2" name="search" type="text" placeholder="Search" style="margin-left: 550px"
                 value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search">
             <button type="submit" class="btn btn-outline-success">Search</button>
-        </form><br>
+        </form><br> --}}
         @if (Route::has('login'))
             <div class=" top-0 right-0 px-6  sm:block">
                 @auth
@@ -50,7 +51,7 @@
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-white-700 dark:text-gray-500 btn btn-primary" style="display: none">Register</a>
+                            class="ml-4 text-sm text-white-700 dark:text-gray-500 btn btn-primary" >Register</a>
                     @endif
                 @endauth
             </div>

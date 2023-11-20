@@ -221,33 +221,37 @@
                         </div>
                     </div>
                 </div>
+                @if(Route::has('login'))
+                @auth
+                <form action="{{route('question.delete',$item->id)}}" method="POST">
+                    @csrf
+                    @if(Auth::user()->id == $item->user_id)
+                    <input name="_method" type="hidden" value="DELETE">
+                    <a  type="submit" data-toggle="tooltip" title='Delete' class="show_confirm" style="float:right"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;margin-top:10px; "></i></a> 
+                </form>
+                    <form action="{{route('question.update',$item->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        {{-- @dd(Auth::user()->id) --}}
+                        <a href="{{ route('question.edit', $item->id) }}">
+                            <i class="fa-solid fa-pen-to-square pointer" title="edit" style="cursor: pointer; float: right;padding:10px"></i></a>
+                            {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
+                        @endif
+                    </form>
+                @endauth
+                @endif
                 <ol class="q" style="padding:10px;">
                   
                     <li>
                         <h5 class="s-post-summary--content-title" style=" font-weight: bold;">
                             <a href="/question/viewquestion/{{$item->id}}" class="s-link"
-                                target="blink">{{ $item->question_title }}</a>
+                                >{{ $item->question_title }}</a>
                         </h5>
                     </li>
                     <p style="font-size: 13px;font-family:sans-serif">{{ $item->description }}</p>
                     <p style="float:right;font-size:12px;cursor: pointer;">Q2A by <span style="color:rgba(10,114,170,255);font-weight:bold">{{ $item->question->name }}</span></p>
                 </ol>
-                @if(Route::has('login'))
-                @auth
-                    <form action="{{route('question.update',$item->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('question.edit', $item->id) }}">
-                            <i class="fa-solid fa-pen-to-square pointer" title="edit" style="cursor: pointer;"></i></a>
-                            {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
-                    </form>
-                    <form action="{{route('question.delete',$item->id)}}" method="POST">
-                        @csrf
-                        <input name="_method" type="hidden" value="DELETE">
-                        <a  type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a> 
-                    </form>
-                @endauth
-                @endif
+              
                
             </div>
             @endforeach
@@ -259,11 +263,11 @@
             </div>
         </div>
         <div class="col-md-3 p-3  text-black" id="productlist">
-            <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search" >
+            <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search"  >
                 @csrf
                 <input class="form-control me-2" name="search" type="text" placeholder="Search"
-                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" style="display: none">
-                <button type="submit" class="btn btn-outline-success" style="display: none">Search</button>
+                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" >
+                <button type="submit" class="btn btn-outline-success">Search</button>
             </form><br>
             <a class="product inherits-color block flex-1" id="product" style="display: none">
                 <div class="panel relative transition-colors duration-300 dark  text-white bg-panel-800 hover:bg-panel-700 rounded-xl mx-auto px-px py-px text-center"

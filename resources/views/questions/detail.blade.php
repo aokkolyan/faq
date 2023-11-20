@@ -255,8 +255,29 @@
                 <div class="list-group">
                     <div class="qa-q-item-stats">
                     </div>
+                    
                     <li class="list-group-item list-group-item-action m-2" aria-current="true" id="answers-list"
                         style="height: auto">
+                        @if (Route::has('login'))
+                            @auth
+                            @if(Auth::user()->id == $answer->user_id)
+                            <form action="{{ url('/question/deleteanswer/' . $answer->id) }}" method="POST">
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <a type="submit" data-toggle="tooltip" title='Delete' class="show_confirm" style="float: right;"><i
+                                        class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;padding:5px;margin-top:11px"></i></a>
+                            </form>
+                                <form action="{{ url('/question/updateanswer/' . $answer->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ url('/question/editanswer/' . $answer->id) }}">
+                                        <i class="fa-solid fa-pen-to-square pointer" title="edit"
+                                            style="cursor: pointer;float: right;"></i></a>
+                                    {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
+                                </form>
+                               @endif
+                            @endauth
+                        @endif
                         <div class="d-flex justify-content-between" style="width:auto">
                             <h6 class="mb-5" id="space-title"><span> {!! $answer->title_answer !!}</span></h6>
                         </div>
@@ -267,24 +288,7 @@
                         }">Answer by <span style="margin-leflt"> {{ $answer->user->name }}</span>
                             </p>
                         </div>
-                        @if (Route::has('login'))
-                            @auth
-                                <form action="{{ url('/question/updateanswer/' . $answer->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ url('/question/editanswer/' . $answer->id) }}">
-                                        <i class="fa-solid fa-pen-to-square pointer" title="edit"
-                                            style="cursor: pointer;"></i></a>
-                                    {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
-                                </form>
-                                <form action="{{ url('/question/deleteanswer/' . $answer->id) }}" method="POST">
-                                    @csrf
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <a type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i
-                                            class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>
-                                </form>
-                            @endauth
-                        @endif
+                        
 
                     </li>
 
