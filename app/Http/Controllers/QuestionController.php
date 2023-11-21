@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -125,13 +126,33 @@ class QuestionController extends Controller
     }
     public function update_answer(Request $request ,$id)
     {
+
+      // try{
+      //   $request->validate([
+      //     'title_answer' => 'required'
+      //   ]);
+      //   $answer = Answer::find($id);
+      //   $answer->title_answer = $request->input('title_answer');
+      //   $answer->update();
+      //   return response()->json(['data' => $answer]);
+
+      // }catch (\Exception $ex) {
+      //       Log::debug('UP_VOTE_EXCEPTION'. $ex->getMessage());
+      //       return response()   
+      //               ->json(['message' => 'There was an error occured!', 'statusCode' => 419])
+      //               ->setStatusCode(200);
+      //   }
+
+     
       $request->validate([
         'title_answer' => 'required'
       ]);
       $answer = Answer::find($id);
       $answer->title_answer = $request->input('title_answer');
-      $answer->update();
-      return redirect('/')->with('success','Update success');
+      $answer->save();
+      $question = Question::find($answer->question_id);
+      return redirect()->route('viewquestion', ['id' =>$answer->id,'id' => $question->id ]);
+                     
     }
     
     public function delete_answer($id)

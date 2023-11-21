@@ -237,7 +237,8 @@
                 <ol class="q" style="padding:10px;">
                     <li>
                         <h5 class="s-post-summary--content-title" style=" font-weight: bold;">
-                            <a href="/question/viewquestion/{{ $question->id }}" class="s-link" target="blink">{{ $question->question_title }}</a>
+                          {{-- @dd($question->id) --}}
+                            <a href="/question/viewquestion/{{ $question->id }}" class="s-link" >{{ $question->question_title  }}</a>
                         </h5>
                     </li>
                     <p style="font-size: 13px;font-family:sans-serif">{{ $question->description }}</p>

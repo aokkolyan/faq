@@ -240,8 +240,7 @@
                     </form>
                 @endauth
                 @endif
-                <ol class="q" style="padding:10px;">
-                  
+                <ol class="q" style="padding:10px;"> 
                     <li>
                         <h5 class="s-post-summary--content-title" style=" font-weight: bold;">
                             <a href="/question/viewquestion/{{$item->id}}" class="s-link"

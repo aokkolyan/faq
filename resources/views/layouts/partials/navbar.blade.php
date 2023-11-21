@@ -37,8 +37,8 @@ padding: 5px; border: 2px solid #4CAF50;">
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}" style="display: none">Profile</a></li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
-                                <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                                {{-- <button type="submit">Logout</button> --}}
+                                <li> <a class="dropdown-item"
                                         onclick="event.preventDefault();
                            this.closest('form').submit();">
                                         Logout
