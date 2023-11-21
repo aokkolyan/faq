@@ -302,7 +302,7 @@
                         multiple>
                         @csrf
                         <div class="form-group">
-                            <label for="">Your Answer</label>
+                            <label for="" style="padding:13px">Your Answer</label>
                             <div class="form-group">
                                 <textarea id="summernote" name="title_answer" placeholder="Answer.........."></textarea>
                             </div>
