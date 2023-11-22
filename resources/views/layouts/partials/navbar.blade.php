@@ -1,4 +1,4 @@
-<nav class="navbar" style="position: relative;z-index: 99999;background: #00A351;color: white;border-bottom: 1px solid #eee;  position: -webkit-sticky;position: sticky;top: 0;
+<nav class="navbar" style="height:20% position: relative;z-index: 99999;background: #00A351;color: white;border-bottom: 1px solid #eee;  position: -webkit-sticky;position: sticky;top: 0;
 padding: 5px; border: 2px solid #4CAF50;">
     <div class="container-fluid">
         {{-- <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/question2answer-qa-logo-white-454x40.png')}}" alt="image"

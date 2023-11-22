@@ -290,7 +290,7 @@
                             <h6 class="mb-5" id="space-title"><span> {!! $answer->title_answer !!}</span></h6>
                         </div>
                         <div class="user">
-                            <small style="margin-left: 84% ; margin-top:20px;font-size:12px">Answered
+                            <small style="margin-left: 82% ; margin-top:20px;font-size:12px">Answered
                                 {{ date('d-M-Y', strtotime($answer->created_at)) }}</small>
                             <p style="float:right;font-size:12px;color: #3498db;text-decoration: underline;
                         }">Answer by <span style="margin-leflt"> {{ $answer->user->name }}</span>
