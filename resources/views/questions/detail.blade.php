@@ -187,7 +187,7 @@
     <div class="row">
         <div class="col-md-1 p-3  text-black">
         </div>
-        <div class="col-md-8 p-3  text-black">
+        <div class="col-md-6 p-3  text-black" style="margin-left:150px">
             @if (Route::has('login'))
                 @auth
                     <a class="float-end btn btn-primary" href="{{ route('question') }} " data-bs-toggle="modal"
@@ -214,6 +214,12 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
+            <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search"  >
+                @csrf
+                <input class="form-control me-2 " name="search" type="text" placeholder="Search"
+                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" style="margin-top: 10px;" >
+                <button type="submit" class="btn btn-outline-success" style="margin-top: 10px;" ><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form><br>
             </p>
             <div class="question-list">
                 <div class="qa-q-item-stats" style="display:none">
@@ -324,14 +330,7 @@
                 @endauth
             @endif
         </div>
-        <div class="col-md-3 p-3  text-black" id="productlist">
-            <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search">
-                @csrf
-                <input class="form-control me-2" name="search" type="text" placeholder="Search"
-                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search">
-                <button type="submit" class="btn btn-outline-success">Search</button>
-            </form><br>
-        </div>
+       
     </div>
 
 @endsection

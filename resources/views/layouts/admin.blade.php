@@ -401,9 +401,9 @@
         }
 
         /* Handle */
-        ::-webkit-scrollbar-thumb {
+        /* ::-webkit-scrollbar-thumb {
             background: #0aa419;
-        }
+        } */
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
@@ -421,6 +421,7 @@
             transition: 0.5s;
 
         }
+      
     </style>
 
     <style>
@@ -433,7 +434,7 @@
 <body>
 
     <div class="container-fuid" style="background: rgb(243, 240, 240)">   
-        <div class="container" >
+        <div class="container-fuid" >
             @include('layouts.partials.navbar')
             @yield('content')
             @include('layouts.partials.modal')

@@ -170,7 +170,7 @@
     <div class="row">
         <div class="col-md-1 p-3  text-black">
         </div>
-        <div class="col-md-8 p-3  text-black">
+        <div class="col-md-8 p-3  text-black" style="margin-left:100px">
             @if (Route::has('login'))
                 @auth
                     <a class="float-end btn btn-primary m-2" href="{{ route('question') }} " data-bs-toggle="modal"
@@ -185,18 +185,25 @@
             {{-- Import users form --}}
             <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <button class="btn btn-success m-0">Import User Data</button>
                 <input type="file" name="file" class="form-control col-md-5">
                 @if ($errors->has('file'))
                     <span class="text-danger">{{ $errors->first('file') }}</span>
                 @endif
-                <br>
-                <button class="btn btn-success">Import User Data</button>
+               
+                
             </form>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
                 </div>
             @endif
+             <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search"  >
+                @csrf
+                <input class="form-control me-2 " name="search" type="text" placeholder="Search"
+                    value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" style="margin-top: 10px;" >
+                <button type="submit" class="btn btn-outline-success" style="margin-top: 10px;" ><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form><br>
             {{-- <p><strong>{{ $questions->count() }}</strong> questions --}}
             <h5 class="qa-main-heading">All Questions</h5>
             </p>
@@ -262,12 +269,12 @@
             </div>
         </div>
         <div class="col-md-3 p-3  text-black" id="productlist">
-            <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search"  >
+            {{-- <form action="{{ url('/question/search') }}" method="GET" class="d-flex" role="search"  >
                 @csrf
-                <input class="form-control me-2" name="search" type="text" placeholder="Search"
+                <input class="form-control me-2 " name="search" type="text" placeholder="Search"
                     value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search" >
-                <button type="submit" class="btn btn-outline-success">Search</button>
-            </form><br>
+                <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form><br> --}}
             <a class="product inherits-color block flex-1" id="product" style="display: none">
                 <div class="panel relative transition-colors duration-300 dark  text-white bg-panel-800 hover:bg-panel-700 rounded-xl mx-auto px-px py-px text-center"
                     style="height: 210px; background: linear-gradient(148deg, rgb(33, 200, 246) -11%, rgba(33, 200, 246, 0) 42%); max-width: 450px;">

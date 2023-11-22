@@ -5,8 +5,8 @@ padding: 5px; border: 2px solid #4CAF50;">
             style="max-height:29px; with:auto;vertical-align: bottom;
             max-width: 100%;
             height: auto !important"></a> --}}
-         <a href="{{ route('question') }}" style="text-decoration: none;font-size: 28px;font-family: monospace; text-shadow:  0 0 3px #FF0000;">FAQ</a>   
-        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px; display:none"></a>
+         <a href="{{ route('question') }}" style="text-decoration: none;font-size: 28px;font-family: monospace; text-shadow:  0 0 3px #FF0000;margin-left:210px">FAQ</a>   
+        <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px; display:none;"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -21,7 +21,7 @@ padding: 5px; border: 2px solid #4CAF50;">
             @csrf
             <input class="form-control me-2" name="search" type="text" placeholder="Search" style="margin-left: 550px"
                 value="{{ request()->get('search') }}" autocomplete="off" aria-label="Search">
-            <button type="submit" class="btn btn-outline-success">Search</button>
+                <button type="submit" class="btn btn-outline-success" id="btn-search"  style="background:white"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form><br> --}}
         @if (Route::has('login'))
             <div class=" top-0 right-0 px-6  sm:block">
@@ -29,7 +29,7 @@ padding: 5px; border: 2px solid #4CAF50;">
                     {{-- <a href="{{ url('/dashboard') }}"
                   class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
                     <div class="dropdown" style="margin-bottom: 20px;margin-top:15px">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn  dropdown-toggle text-white" style="font-size: 15px" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             {{ Auth::user()->Getfullname() }}
                         </button>
