@@ -7,6 +7,7 @@ use App\Http\Controllers\AnswerController;
 use Symfony\Component\Console\Input\Input;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
 
@@ -67,4 +68,11 @@ Route::get('posts/create',[PostController::class,'create']);
 Route::post('posts/store',[PostController::class,'store'])->name('posts.store');
 
 Route::resource('/answer',AnswerController::class);
+
+Route::group(['middleware' => ['auth']], function() {
+    // Route::get('/user-management', [UserController::class, 'index']);
+    Route::resource('users', UserController::class);
+    Route::resource('roles',RoleController::class);
+});
+
 require __DIR__.'/auth.php';
