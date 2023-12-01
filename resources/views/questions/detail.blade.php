@@ -281,6 +281,8 @@
                                     <a href="{{ url('/question/editanswer/' . $answer->id) }}">
                                         <i class="fa-solid fa-pen-to-square pointer" title="edit"
                                             style="cursor: pointer;float: right;"></i></a>
+
+                                      
                                     {{-- <a  href="{{route('question.delete',$item->id)}}" type="submit" data-toggle="tooltip" title='Delete' class="show_confirm"><i class="fa-sharp fa-solid fa-trash" style="color: red; cursor: pointer;"></i></a>  --}}
                                 </form>
                                @endif

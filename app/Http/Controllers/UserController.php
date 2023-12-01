@@ -5,7 +5,7 @@ use Illuminate\Support\Arr;
 use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -26,11 +26,16 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+    //    $users = User::with('roles')->get();
+    //    dd($users);
+        $roles = Role::pluck('name','name')->all();
+        // dd($roles);
         $users = User::select("*")
         ->whereNotNull('last_seen')
         ->orderBy('last_seen', 'DESC')
         ->paginate(10);
-        return view('users.index', compact('users'))->with('i',($request->input('page',1) - 1) * 5);
+       
+        return view('users.index', compact('users','roles'))->with('i',($request->input('page',1) - 1) * 5);
     }
      /**
      * Show the form for creating a new resource.
@@ -76,8 +81,8 @@ class UserController extends Controller
     {
        $user = User::find($id);
        $roles = Role::pluck('name' , 'name')->all();
-    //    $userRole = $user->roles->pluck('name','name')->all();
-       return view('users.edit',compact('user','roles'));
+       $userRole = $user->roles->pluck('name','name')->all();
+       return view('users.edit',compact('user','roles','userRole'));
     }
     /**
      * Update the specified resource in storage.
@@ -88,12 +93,11 @@ class UserController extends Controller
      */
     public function update(Request $request , $id)
     {
-        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
-            // 'roles' => 'required'
+            'roles' => 'required'
         ]);
         $input = $request->all();
         if(!empty($input['password'])){ 
@@ -122,5 +126,28 @@ class UserController extends Controller
     {
        $user = User::find($id);
        return view('users.show',compact('user'));
+    }
+    // public function change()
+    // {
+    //      echo "helll";
+    //     return view ('users.reset-password');
+    // }
+    public function resetPassword(Request $request ,$id)
+    {
+         $request->validate([
+            'password' => ['required','string' ,'min:6','max:25'],
+        ], [
+            'password.required' => 'Password is required'
+        ]);
+        $user = User::find(auth()->user()->id);
+        // $user = Auth::user()->id;
+    //  $user =   User::find(auth()->user()->id)->update(['password'=> Hash::make($request->password)]);
+        // $user=$request->user_id?User::find($request->user_id):Auth::user();
+        // dd($user);
+        $user->update([
+            'password' => Hash::make($request->password),
+           
+        ]);
+       return redirect()->back()->with('message', 'Password was update success');
     }
 }

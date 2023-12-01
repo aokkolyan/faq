@@ -5,9 +5,20 @@ padding: 5px; border: 2px solid #4CAF50;">
             style="max-height:29px; with:auto;vertical-align: bottom;
             max-width: 100%;
             height: auto !important"></a> --}}
-         <a href="{{ route('question') }}" style="text-decoration: none;font-size: 28px;font-family: monospace; text-shadow:  0 0 3px #FF0000;margin-left:210px">FAQ</a>   
-         <a href="{{route('users.index')}}" style="float: right">Manage Users</a>
-         <a href="{{route('roles.index')}}">Manage Role</a>
+         <a href="{{ route('question') }}" style="text-decoration: none;font-size: 28px;font-family: monospace; text-shadow:  0 0 3px #FF0000;margin-left:210px">FAQ</a>
+      
+         @if (Route::has('login'))
+         @auth
+       
+         @if (Auth::user()->hasRole('Admin'))
+         <a href="{{route('users.index')}}" style="margin-left:auto;padding:inherit;color:white;text-decoration:none">Manage Users</a>
+         <a href="{{route('roles.index')}}" style="color: white;text-decoration:none">Manage Role</a>
+     @endif
+       
+       
+        
+         @endauth      
+         @endif
         <a class="navbar-brand" href="{{ route('question') }}"><img src="{{asset('images/logo.png')}}" alt="image" style="width: 250px; display:none;"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent ">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

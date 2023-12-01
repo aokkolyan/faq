@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 
@@ -61,7 +62,8 @@ Route::get('/question/search',[QuestionController::class,'search']);
 
  //Import User
  Route::post('users-import', [UserController::class,'import'])->name('users.import');
-
+ Route::get('change/{id}', [UserController::class,'change'])->name('users.change');
+ Route::post('change-password/{id}', [UserController::class,'resetPassword'])->name('reset.password');
 //Post test//
 Route::get('/posts',[PostController::class,'index']);
 Route::get('posts/create',[PostController::class,'create']);
@@ -69,6 +71,8 @@ Route::post('posts/store',[PostController::class,'store'])->name('posts.store');
 
 Route::resource('/answer',AnswerController::class);
 
+
+// USer permission
 Route::group(['middleware' => ['auth']], function() {
     // Route::get('/user-management', [UserController::class, 'index']);
     Route::resource('users', UserController::class);

@@ -255,7 +255,9 @@
                         </h5>
                     </li>
                     <p style="font-size: 13px;font-family:sans-serif">{{ $item->description }}</p>
-                    <p style="float:right;font-size:12px;cursor: pointer;">Q2A by <span style="color:rgba(10,114,170,255);font-weight:bold">{{ $item->question->name }}</span></p>
+                    <p style="float:right;font-size:12px;cursor: pointer;">Q2A by <span style="color:rgba(10,114,170,255);font-weight:bold"> 
+                        
+                        {{ $item->question->name ?? "Unknow"}}</span></p>
                 </ol>
               
                
